@@ -1,3 +1,6 @@
+using BLL.Validaciones;
+using SISTEMA.API.DBContextDapper;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add services to the container.
+builder.Services.AddSingleton<DapperCNN>();
+builder.Services.AddSingleton<ClientesValidaciones>();
+
 var app = builder.Build();
+
+
+//IMPORTACIÓN PARA LA BASE DE DATOS
+builder.Configuration.AddJsonFile("appsettings.json");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
